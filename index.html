@@ -1,28 +1,81 @@
-                                             
+import React, { useState } from 'react';
+import { ShoppingCart, Star } from 'lucide-react';
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>bro thong</title>
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover minimal-ui standalone">
-<meta name="apple-mobile-web-app-capable" content="yes">
-</head>
-<div class="name">
-<h1>Games</h1>
-</div>
-<br>
-<br>
-<br>
-<center>
-<div class="apps">
-<a href="itms-services://?action=download-manifest&url=https://sokhak12.github.io/bro-thong/pubgzero.plist">Get</a>
-<img src="https://staticg.sportskeeda.com/editor/2021/06/b400a-16226420458969.png">
-<h1>Pubg Mobile 1.6 ios zero</h1>
-</div> 
+const ProductPage = () => {
+  const [quantity, setQuantity] = useState(1);
 
- <h1> <center> BY 😂 <a href="https://t.me/bro_thong">(telegram)@bro_thong</a> </h1>
-<h1> <center> and dev 😂 <a href="https://t.me/hak_officail">(telegram)@hak_officail</a> </h1>
- 
+  const product = {
+    name: "Premium Wireless Earbuds",
+    price: 129.99,
+    description: "High-quality wireless earbuds with noise cancellation, 24-hour battery life, and crystal-clear sound.",
+    features: [
+      "Bluetooth 5.2 connectivity",
+      "Noise cancellation technology",
+      "24-hour battery life",
+      "Waterproof design",
+      "Comfortable ergonomic fit"
+    ]
+  };
+
+  const handleAddToCart = () => {
+    alert(`Added ${quantity} ${product.name}(s) to cart`);
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg flex">
+      <div className="w-1/2 pr-6">
+        <img 
+          src="/api/placeholder/500/500" 
+          alt={product.name} 
+          className="w-full h-auto rounded-lg"
+        />
+      </div>
+      <div className="w-1/2">
+        <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+        <div className="flex items-center mb-4">
+          <div className="flex text-yellow-500">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} fill="currentColor" size={20} />
+            ))}
+          </div>
+          <span className="ml-2 text-gray-600">(127 reviews)</span>
+        </div>
+        <p className="text-2xl font-semibold text-green-600 mb-4">
+          ${product.price.toFixed(2)}
+        </p>
+        <p className="mb-4 text-gray-700">{product.description}</p>
+        
+        <h3 className="font-bold mb-2">Key Features:</h3>
+        <ul className="list-disc pl-5 mb-4">
+          {product.features.map((feature, index) => (
+            <li key={index} className="mb-1">{feature}</li>
+          ))}
+        </ul>
+        
+        <div className="flex items-center mb-4">
+          <label htmlFor="quantity" className="mr-2">Quantity:</label>
+          <input 
+            type="number" 
+            id="quantity"
+            min="1"
+            value={quantity}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
+            className="w-20 p-2 border rounded"
+          />
+        </div>
+        
+        <button 
+          onClick={handleAddToCart}
+          className="w-full bg-blue-600 text-white py-3 rounded flex items-center justify-center hover:bg-blue-700"
+        >
+          <ShoppingCart className="mr-2" /> Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductPage;                                             
+
+
 
